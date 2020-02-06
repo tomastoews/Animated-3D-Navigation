@@ -1,24 +1,25 @@
 project="3dnavigation"
+container_port=8098
 
-echo Starting deployment of $project
+echo "Starting deployment of $project"
 
-echo Cleaning dist/ directory...
+echo "Cleaning dist/ directory..."
 ssh root@tomastoews.de "rm -r -f -v /containers/$project/dist/*"
 echo Cleaning done: ok
 
-echo Uploading dist/ files...
+echo "Uploading dist/ files..."
 scp -r dist root@tomastoews.de:/containers/$project/;
 echo Upload done: ok
 
-echo Uploading dockerfile and nginx files...
-scp Dockerfile nginx.conf default.conf root@tomastoews.de:/containers/$project/
+echo "Uploading dockerfile..."
+scp Dockerfile root@tomastoews.de:/containers/$project/
 echo Upload done: ok
 
-ssh root@tomastoews.de "cd /containers/$project && sh ./build-image.sh && sh ./start.sh"
+ssh root@tomastoews.de "cd /containers/scripts && sh ./build-image.sh $project && sh ./start.sh $project $container_port:80"
 
-echo Image build done: ok
-echo Container restart done: ok
+echo "Image build done: ok"
+echo "Container restart done: ok"
 
-echo -----------------------
-echo \| Deployment done: ok \|
-echo -----------------------
+echo "-----------------------"
+echo "\| Deployment done: ok \|"
+echo "-----------------------"
