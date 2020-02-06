@@ -1,0 +1,268 @@
+
+/* Variables */
+:root {
+    --background-color: #485274;
+    --nav-background-color: #343c55;
+    --nav-item-hover-color: #2B3145;
+    --nav-item-selected-color: #212635;
+    --secondary-color: coral;
+    --nav-height: 170px;
+    --transition-duration: 0.5s;
+}
+
+body {
+    background-color: var(--background-color);
+    color: #fff;
+    font-family: "Open Sans", sans-serif;    
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+/* Navigation */
+.nav-container {
+    position: fixed;
+    height: var(--nav-height);
+    top: 0;
+    left: 0;
+    visibility: hidden;
+
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+
+    -webkit-transition: -webkit-transform var(--transition-duration) 0s, 
+                        visibility 0s var(--transition-duration);
+    -moz-transition: -moz-transform var(--transition-duration) 0s, 
+                        visibility 0s var(--transition-duration);
+    transition: transform var(--transition-duration) 0s, 
+                        visibility 0s var(--transition-duration);
+
+    background-color: #000;
+    display: block;
+    width: 100%;
+}
+
+.nav-container.nav-is-visible {
+    visibility: visible;
+
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    
+    -webkit-transition: -webkit-transform var(--transition-duration) 0s, 
+                        visibility var(--transition-duration) 0s;
+    -moz-transition: -moz-transform var(--transition-duration) 0s, 
+                        visibility var(--transition-duration) 0s;
+    transition: transform var(--transition-duration) 0s, 
+                        visibility var(--transition-duration) 0s;
+}
+
+@media (max-width: 750px) {
+    :root { --nav-height: 100px; }
+}
+
+.nav {
+    position: relative;
+    background-color: var(--nav-background-color);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+
+    -webkit-transform-origin: center bottom;
+    -moz-transform-origin: center bottom;
+    -ms-transform-origin: center bottom;
+    -o-transform-origin: center bottom;
+    transform-origin: center bottom;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    -ms-transform: rotateX(90deg);
+    -o-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+
+    -webkit-transition: -webkit-transform var(--transition-duration);
+    -moz-transition: -moz-transform var(--transition-duration);
+    transition: transform var(--transition-duration);
+}
+
+.nav-is-visible .nav { 
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -ms-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+}
+
+.nav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity var(--transition-duration) 0s, 
+                        visibility var(--transition-duration) 0s;
+    -moz-transition: opacity var(--transition-duration) 0s, 
+                        visibility var(--transition-duration) 0s;
+    transition: opacity var(--transition-duration) 0s, 
+                        visibility var(--transition-duration) 0s;
+}
+
+.nav-is-visible .nav::after {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity var(--transition-duration) 0s, 
+                        visibility 0s var(--transition-duration);
+    -moz-transition: opacity v--transition-duration 0s, 
+                        visibility 0s v--transition-duration;
+    transition: opacity v--transition-duration 0s, 
+                        visibility 0s v--transition-duration;
+}
+
+.nav li {
+    width: 20%;
+    height: 100%;
+    display: list-item;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav li a:hover {
+    background-color: var(--nav-item-hover-color);
+}
+
+.nav li.selected {
+    background-color: var(--nav-item-selected-color);
+}
+
+.nav li a {
+    -webkit-transition: all var(0.2s);
+    -moz-transition: all var(0.2s);
+    transition: all 0.2s;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Navigation Marker */
+.marker {
+    cursor: pointer;
+    position: absolute;
+    height: 3px;
+    width: 20%;
+    margin-top: -3px;
+    color: var(--secondary-color);
+    background-color: var(--secondary-color);
+
+    -webkit-transition: -webkit-margin var(--transition-duration);
+    -moz-transition: -moz-margin var(--transition-duration);
+    transition: margin var(--transition-duration);
+}
+
+.marker::before {
+    cursor: pointer;
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    right: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    height: 0;
+    width: 0;
+    border: 10px solid transparent;
+    border-bottom-color: inherit;
+}
+
+/* Content */
+main {
+    -webkit-transition: -webkit-transform var(--transition-duration);
+    -moz-transition: -moz-transform var(--transition-duration);
+    transition: transform var(--transition-duration);
+}
+
+main.nav-is-visible {
+    -webkit-transform: translateY(var(--nav-height));
+    -moz-transform: translateY(var(--nav-height));
+    -ms-transform: translateY(var(--nav-height));
+    -o-transform: translateY(var(--nav-height));
+    transform: translateY(var(--nav-height));
+}
+
+/* Button */
+.menu-button {
+    -webkit-transition: all var(0.2s);
+    -moz-transition: all var(0.2s);
+    transition: all 0.2s;
+
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);    
+    
+    margin-left: 50%;
+    background-color: var(--nav-background-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 70px;
+    padding: 25px 45px;
+    font-size: 16px;
+    border-radius: 50px 50px;
+    border: 4px solid transparent;
+}
+
+.menu-button::before {
+    content: 'Open Menu';
+    font-size: 17px;
+}
+
+main.nav-is-visible > .menu-button {
+    /* border-color: var(--secondary-color); */
+    background-color: var(--nav-item-hover-color);
+}
+
+main.nav-is-visible > .menu-button::before {
+    content: 'Close Menu'
+}
+
+.menu-button:hover {
+    background-color: var(--nav-item-hover-color);
+}
+
+.menu-button:focus {
+    outline: none;
+}
