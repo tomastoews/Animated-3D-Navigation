@@ -13,11 +13,11 @@ openButton.addEventListener('click', toggle);
 navLinks.forEach(item => item.addEventListener('click', function(e) {  moveMarker(e) }));
 
 // Wait for marker move transition to finish
-marker.addEventListener('transitionend', close);
+/* marker.addEventListener('transitionend', close);
 marker.addEventListener('webkitTransitionEnd', close);
 marker.addEventListener('otransitionend', close);
 marker.addEventListener('oTransitionEnd', close);
-marker.addEventListener('msTransitionEnd', close);
+marker.addEventListener('msTransitionEnd', close); */
 
 // Wait for the key M to be pressed
 document.addEventListener('keypress', (e) => {
