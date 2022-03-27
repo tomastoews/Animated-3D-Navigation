@@ -2,7 +2,7 @@
   "name": "3d-navigation",
   "version": "1.0.0",
   "scripts": {
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html && node rewriteURLs.js"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,9 @@
   },
   "homepage": "https://github.com/tomastoews/Animated-3D-Navigation#readme",
   "dependencies": {
-    "parcel-bundler": "^1.12.4",
     "replace-in-file": "^4.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.4.0"
   }
 }
