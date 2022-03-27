@@ -2,7 +2,7 @@
   "name": "3d-navigation",
   "version": "1.0.0",
   "scripts": {
-    "build": "parcel build src/index.html && node rewriteURLs.js"
+    "build": "rm -rf dist/ && parcel build src/index.html && node rewriteURLs.js"
   },
   "repository": {
     "type": "git",
